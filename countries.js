@@ -1,3 +1,4 @@
+//#region countries
 var Country = /** @class */ (function () {
     function Country(name, nationality) {
         this.name = name;
@@ -5,7 +6,6 @@ var Country = /** @class */ (function () {
     }
     return Country;
 }());
-//#region countries
 var australia = new Country("Australia", "Australian");
 var bolivia = new Country("Bolivia", "Bolivian");
 var brazil = new Country("Brazil", "Brazilian");
@@ -50,7 +50,6 @@ var countriesList = [
     sweeden,
     theUSA,
 ];
-//#endregion
 function getRandomCountries(countries, amount) {
     var cnts = [];
     for (var i = 0; i < countries.length; i++) {
@@ -69,6 +68,11 @@ function getRandomCountries(countries, amount) {
     }
     return list;
 }
+function getRandomCountry() {
+    return countriesList[Math.floor(Math.random() * countriesList.length)];
+}
+//#endregion
+//#region Person
 var Person = /** @class */ (function () {
     function Person(country, isMale) {
         this.country = country;
@@ -78,43 +82,57 @@ var Person = /** @class */ (function () {
     }
     return Person;
 }());
-function buildQuestion(size, questionNumber, people) {
-    var answers = [];
-    for (var i = 0; i < size; i++) {
-        switch (questionNumber) {
-            case 1:
-                answers.push(people[i].pronoun + " is " + people[i].country.nationality + ".");
-                break;
-            case 2:
-                answers.push(people[i].pronoun + " is from " + people[i].country.name + ".");
-                break;
-            case 3:
-                answers.push("".concat(people[i].adjective, " country is ").concat(people[i].country.name, "."));
-                break;
-        }
-    }
-    return answers;
+function generatePerson() {
+    return new Person(getRandomCountry(), Math.floor(Math.random() * 2) == 0);
 }
 function generatePeople(amount) {
-    var randomCountries = getRandomCountries(countriesList, amount);
     var people = [];
     for (var i = 0; i < amount; i++) {
-        people.push(new Person(randomCountries[i], Math.floor(Math.random() * 2) == 0));
+        people.push(generatePerson());
     }
     return people;
 }
+//#endregion
+//#region exercise
+function buildExercise(questionNumber, person) {
+    switch (questionNumber) {
+        case 1:
+            return person.pronoun + " is " + person.country.nationality + ".";
+        case 2:
+            return person.pronoun + " is from " + person.country.name + ".";
+        case 3:
+            return "".concat(person.adjective, " country is ").concat(person.country.name, ".");
+    }
+    return "";
+}
+function buildExercises(questionNumber, people, startIndex, amount) {
+    var exercises = [];
+    for (var i = startIndex; i < amount + startIndex; i++) {
+        exercises.push(buildExercise(questionNumber, people[i]));
+    }
+    return exercises;
+}
+//#endregion
 var questionsAmount = [5, 5, 5];
-var questionsTotal = questionsAmount[0] + questionsAmount[1] + questionsAmount[2];
+var questionsTotal = 0;
+for (var i = 0; i < questionsAmount.length; i++) {
+    questionsTotal += questionsAmount[i];
+}
 var people = generatePeople(questionsTotal);
-var question1 = buildQuestion(questionsAmount[0], 1, people);
-var question2 = buildQuestion(questionsAmount[1], 2, people);
-var question3 = buildQuestion(questionsAmount[2], 3, people);
-var answers = document.getElementsByClassName("answer");
-answers[0].innerHTML = question1[0];
+var answers = [];
+for (var i = 0; i < questionsAmount.length; i++) {
+    answers.push.apply(answers, buildExercises(i + 1, people, i * 5, 5));
+}
+var answersElement = document.getElementsByClassName("answer");
 var showButtons = document.getElementsByClassName("show-button");
-var userAnswers = document.getElementsByClassName("exercise__input");
+var checkButtons = document.getElementsByClassName("check-button");
+var resultElement = document.getElementsByClassName("result");
+var InputElement = document.querySelectorAll("input");
 var countriesElement = document.getElementsByClassName("country");
 var sexSymbolElement = document.getElementsByClassName("sex-symbol");
+for (var i = 0; i < answersElement.length; i++) {
+    answersElement[i].innerHTML = answers[i];
+}
 for (var i = 0; i < countriesElement.length; i++) {
     countriesElement[i].innerHTML = people[i].country.name;
     if (people[i].isMale)
@@ -124,10 +142,21 @@ for (var i = 0; i < countriesElement.length; i++) {
 }
 var _loop_1 = function (i) {
     showButtons[i].addEventListener("click", function () { return showAnswer(i); });
+    checkButtons[i].addEventListener("click", function () { return checkAnswer(i); });
 };
 for (var i = 0; i < showButtons.length; i++) {
     _loop_1(i);
 }
 function showAnswer(i) {
-    answers[i].classList.toggle("answer--show");
+    answersElement[i].classList.toggle("answer--show");
+}
+function checkAnswer(i) {
+    if (resultElement[i].classList.contains("result--right"))
+        resultElement[i].classList.remove("result--right");
+    if (resultElement[i].classList.contains("result--wrong"))
+        resultElement[i].classList.remove("result--wrong");
+    if (answers[i] == InputElement[i].value)
+        resultElement[i].classList.add("result--right");
+    else
+        resultElement[i].classList.add("result--wrong");
 }

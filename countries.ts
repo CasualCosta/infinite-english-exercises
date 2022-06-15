@@ -1,6 +1,9 @@
+
+//#region countries
 class Country {
   readonly name: any;
   readonly nationality: string;
+  
   constructor(name: string, nationality: string) {
     this.name = name;
     this.nationality = nationality;
@@ -8,7 +11,6 @@ class Country {
 }
 
 
-//#region countries
 const australia = new Country("Australia", "Australian");
 const bolivia = new Country("Bolivia", "Bolivian");
 const brazil = new Country("Brazil", "Brazilian");
@@ -54,7 +56,6 @@ const countriesList: Country[] = [
   sweeden,
   theUSA,
 ];
-//#endregion
 
 
 function getRandomCountries(countries: Country[], amount: number): Country[] {
@@ -77,6 +78,12 @@ function getRandomCountries(countries: Country[], amount: number): Country[] {
   return list;
 }
 
+function getRandomCountry(): Country{
+  return countriesList[Math.floor(Math.random() * countriesList.length)]
+}
+//#endregion
+
+//#region Person
 class Person {
   country: Country;
   isMale: boolean;
@@ -90,57 +97,67 @@ class Person {
   }
 }
 
+function generatePerson(): Person{
+  return new Person(getRandomCountry(), Math.floor(Math.random() * 2) == 0);
 
-function buildQuestion(size: number, questionNumber: number, people: Person[]): string[] {
-  let answers: string[] = [];
-  for (let i = 0; i < size; i++) {
-    switch (questionNumber) {
-      case 1:
-        answers.push(
-          people[i].pronoun + " is " + people[i].country.nationality + "."
-        );
-        break;
-      case 2:
-        answers.push(
-          people[i].pronoun + " is from " + people[i].country.name + "."
-        );
-        break;
-      case 3:
-        answers.push(
-          `${people[i].adjective} country is ${people[i].country.name}.`
-        );
-        break;
-    }
-  }
-  return answers;
 }
-
-
 function generatePeople(amount: number): Person[]{
-  let randomCountries = getRandomCountries(countriesList, amount);
   let people: Person[] = [];
   for(let i = 0; i < amount; i++){
-    people.push(new Person(randomCountries[i], Math.floor(Math.random() * 2) == 0));
+    people.push(generatePerson());
   }
   return people;
 }
+//#endregion
+
+
+
+//#region exercise
+function buildExercise(questionNumber: number, person: Person): string {
+  switch (questionNumber) {
+    case 1:
+      return person.pronoun + " is " + person.country.nationality + ".";
+    case 2:
+      return person.pronoun + " is from " + person.country.name + ".";
+    case 3:
+      return `${person.adjective} country is ${person.country.name}.`;
+  }
+  return "";
+}
+
+function buildExercises(questionNumber: number, people: Person[], startIndex: number, amount: number): string[] {
+  let exercises: string[] = [];
+  for(let i = startIndex; i < amount + startIndex; i++){
+    exercises.push(buildExercise(questionNumber, people[i]));
+  }
+  return exercises;
+}
+//#endregion
 
 let questionsAmount: number[] = [5, 5, 5];
-let questionsTotal: number = questionsAmount[0] + questionsAmount[1] + questionsAmount[2];
+let questionsTotal: number = 0;
+for(let i = 0; i < questionsAmount.length; i++){
+  questionsTotal += questionsAmount[i];
+}
 let people = generatePeople(questionsTotal);
-let question1: string[] = buildQuestion(questionsAmount[0], 1, people);
-let question2: string[] = buildQuestion(questionsAmount[1], 2, people);
-let question3: string[] = buildQuestion(questionsAmount[2], 3, people);
+let answers: string[] = [];
+for(let i = 0; i < questionsAmount.length; i++){
+  answers.push(...buildExercises(i + 1, people, i * 5, 5));
+}
 
 
-let answers = document.getElementsByClassName("answer");
 
-answers[0].innerHTML = question1[0];
-
+const answersElement = document.getElementsByClassName("answer");
 const showButtons = document.getElementsByClassName("show-button");
-const userAnswers = document.getElementsByClassName("exercise__input");
+const checkButtons = document.getElementsByClassName("check-button");
+const resultElement = document.getElementsByClassName("result");
+const InputElement = document.querySelectorAll("input");
 const countriesElement = document.getElementsByClassName("country");
 const sexSymbolElement = document.getElementsByClassName("sex-symbol");
+
+for(let i = 0; i < answersElement.length; i++){
+  answersElement[i].innerHTML = answers[i];
+}
 for(let i = 0; i < countriesElement.length; i++){
   countriesElement[i].innerHTML = people[i].country.name;
   if(people[i].isMale)
@@ -152,8 +169,20 @@ for(let i = 0; i < countriesElement.length; i++){
 
 for(let i = 0; i < showButtons.length; i++){
   showButtons[i].addEventListener("click", () => showAnswer(i));
+  checkButtons[i].addEventListener("click", () => checkAnswer(i));
 }
 function showAnswer(i: number){
-  answers[i].classList.toggle("answer--show");
+  answersElement[i].classList.toggle("answer--show");
   
+}
+
+function checkAnswer(i: number){
+  if(resultElement[i].classList.contains("result--right"))
+    resultElement[i].classList.remove("result--right");
+  if(resultElement[i].classList.contains("result--wrong"))
+    resultElement[i].classList.remove("result--wrong");
+  if(answers[i] == InputElement[i].value)
+    resultElement[i].classList.add("result--right");
+  else
+    resultElement[i].classList.add("result--wrong");
 }

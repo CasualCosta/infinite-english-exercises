@@ -1,10 +1,35 @@
+.exercise__description{
+    display: inline;
+    width: 80%
+}
+
 .exercise__item{
     display: flex;
     flex-wrap: wrap;
     height: 1.25rem;
+    margin: 10px 0;
 }
 .exercise__item > *{
     margin: 2px 5px;
+}
+
+.country{
+    width: 80px;
+}
+
+
+.result{
+    width: 20px;
+    height: 20px;
+    background-size: contain;
+}
+
+.result--right{
+    background-image: url("images/result-right.svg");
+}
+
+.result--wrong{
+    background-image: url("images/result-wrong.svg");
 }
 
 .show-button{
@@ -27,10 +52,19 @@
 }
 
 .sex-symbol{
-    height: 25px;
-    width: 25px;
+    height: 20px;
+    width: 20px;
     background-size:contain;
     background-repeat: no-repeat;
+}
+
+.sex-symbol--description{
+    height: 10px;
+    width: 10px;
+    background-size:contain;
+    background-repeat: no-repeat;
+    background-image: url(images/sex-symbol-male.svg);
+    display: inline-block;
 }
 
 .sex-symbol--male{
