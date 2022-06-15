@@ -1,0 +1,42 @@
+.exercise__item{
+    display: flex;
+    flex-wrap: wrap;
+    height: 1.25rem;
+}
+.exercise__item > *{
+    margin: 2px 5px;
+}
+
+.show-button{
+    position: relative;
+}
+
+.answer{
+    position: absolute;
+    background-color: greenyellow;
+    top: -3.5rem;
+    display: none;
+}
+
+.answer--hide{
+    display: none;
+}
+
+.answer--show{
+    display: block;
+}
+
+.sex-symbol{
+    height: 25px;
+    width: 25px;
+    background-size:contain;
+    background-repeat: no-repeat;
+}
+
+.sex-symbol--male{
+    background-image: url(images/sex-symbol-male.svg);
+}
+
+.sex-symbol--female{
+    background-image: url(images/sex-symbol-female.svg);
+}

@@ -1,0 +1,39 @@
+.exercises-section {
+    display: flex;
+}
+
+.exercise__div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: var(--div-width);
+    border-radius: 20px;
+    background-color: #012758;
+    border-width: 0;
+    color: var(--background);
+    text-shadow: 0 0 2px #040404;
+    cursor: pointer;
+    padding: var(--div-padding);
+}
+
+.exercise__image{
+    border-radius: 5px;
+    --size: calc(var(--div-width) - var(--div-padding));
+    background-color: white;
+    width: var(--size);
+    height: var(--size);
+}
+
+.exercise__name{
+    font-size: 1.35rem;
+    margin: 10px 0;
+}
+
+.exercise__vocabulary{
+    margin: 5px;
+}
+
+.exercise__grammar{
+    margin: 5px;
+}

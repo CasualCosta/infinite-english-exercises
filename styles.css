@@ -1,0 +1,27 @@
+:root{
+    --header-background: #012758;
+    --white: #dddddd;
+    --background: silver;
+    background-color: var(--background);
+    
+
+    --div-width: 160px;
+    --div-padding: 15px;
+}
+
+body{
+    margin: 0 1rem;
+}
+
+header{
+    background-color: var(--header-background);
+    margin: 15px auto;
+    width: 40%;
+    text-align: center;
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+}
+
+.header__title{
+    color: var(--white);
+}
