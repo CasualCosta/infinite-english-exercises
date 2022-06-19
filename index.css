@@ -9,20 +9,25 @@
     text-align: center;
     width: var(--div-width);
     border-radius: 20px;
-    background-color: #012758;
+    background-color: var(--white);
     border-width: 0;
-    color: var(--background);
+    color: var(--red);
     text-shadow: 0 0 2px #040404;
     cursor: pointer;
     padding: var(--div-padding);
 }
 
 .exercise__image{
-    border-radius: 5px;
+    border-radius: 100%;
     --size: calc(var(--div-width) - var(--div-padding));
     background-color: white;
+    background-size: cover;
     width: var(--size);
     height: var(--size);
+}
+
+.exercise__image--countries{
+    background-image: url("images/flag-american.jpg");
 }
 
 .exercise__name{

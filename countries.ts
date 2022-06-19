@@ -30,7 +30,7 @@ const peru = new Country("Peru", "Peruvian");
 const portugal = new Country("Portugal", "Portuguese");
 const russia = new Country("Russia", "Russian");
 const spain = new Country("Spain", "Spanish");
-const sweeden = new Country("Sweeden", "Sweedish");
+const sweeden = new Country("Sweeden", "Swedish");
 const theUSA = new Country("The USA", "American");
 
 const countriesList: Country[] = [

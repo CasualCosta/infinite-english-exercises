@@ -1,7 +1,8 @@
 :root{
-    --header-background: #012758;
-    --white: #dddddd;
-    --background: silver;
+    --header-background: #ffffff;
+    --white: #eeeeee;
+    --red: #be3131;
+    --background: rgb(73, 82, 207);
     background-color: var(--background);
     
 
@@ -23,5 +24,5 @@ header{
 }
 
 .header__title{
-    color: var(--white);
+    
 }
