@@ -1,0 +1,32 @@
+.exercise-section {
+    display: inline-block;
+    margin: auto;
+}
+
+.description{
+    width: 80px;
+}
+
+.sex-symbol{
+    height: 20px;
+    width: 20px;
+    background-size:contain;
+    background-repeat: no-repeat;
+}
+
+.sex-symbol--description{
+    height: 10px;
+    width: 10px;
+    background-size:contain;
+    background-repeat: no-repeat;
+    background-image: url(../images/sex-symbol-male.svg);
+    display: inline-block;
+}
+
+.sex-symbol--male{
+    background-image: url(../images/sex-symbol-male.svg);
+}
+
+.sex-symbol--female{
+    background-image: url(../images/sex-symbol-female.svg);
+}

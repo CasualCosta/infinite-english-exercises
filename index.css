@@ -15,6 +15,8 @@
     text-shadow: 0 0 2px #040404;
     cursor: pointer;
     padding: var(--div-padding);
+    margin: 0 1rem;
+    height: 300px;
 }
 
 .exercise__image{
@@ -30,15 +32,28 @@
     background-image: url("images/flag-american.jpg");
 }
 
+.exercise__image--cities{
+    background-image: url("images/city-skyline.jpg");
+}
+
+.exercise__image--painting{
+    background-image: url("images/painting.jpg");
+}
+
 .exercise__name{
     font-size: 1.35rem;
     margin: 10px 0;
+    height: 2rem;
 }
 
 .exercise__vocabulary{
     margin: 5px;
+    height: 2rem;
+    vertical-align: middle;
 }
 
 .exercise__grammar{
     margin: 5px;
+    height: 2rem;
+    vertical-align: middle;
 }
