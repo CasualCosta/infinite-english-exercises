@@ -74,3 +74,7 @@
 .thumbs--down{
     background-image: url(images/thumbs-down.svg);
 }
+
+.question--mark{
+    background-image: url(images/question-mark.svg);
+}

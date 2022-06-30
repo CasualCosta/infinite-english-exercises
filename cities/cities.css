@@ -2,24 +2,3 @@
     width: 320px;
 }
 
-.thumbs{
-    width: 20px;
-    height: 20px;
-    background-size: contain;
-}
-
-.thumbs--example {
-    display: inline-block;
-    width: 20px;
-    height: 20px;
-    background-size: contain;
-    background-image: url(../images/thumbs-up.svg);
-}
-
-.thumbs--up{
-    background-image: url(../images/thumbs-up.svg);
-}
-
-.thumbs--down{
-    background-image: url(../images/thumbs-down.svg);
-}

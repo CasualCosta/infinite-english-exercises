@@ -61,6 +61,10 @@
         new Subject("balcony", "house", "a", false),
         new Subject("study", "house", "a", false)
     ]
+
+    function GetRandomSubject(): Subject {
+        return subjects[Math.floor(Math.random() * subjects.length)];
+    }
     //#endregion
 
     class Question{
@@ -75,28 +79,37 @@
         buildSentence(subject: Subject, amount: number, type: number): string {
             let article: string = "";
             switch(amount){
-                case 1: article = `${subject.article} `; break;
-                case 2: article = "two ";
-                case 3: article = "three";
+                case 1: article = `${subject.article}`; break;
+                case 2: article = "two"; break;
+                case 3: article = "three"; break;
             }
+            let name = subject.name;
             let container = subject.container;
             if(amount > 1) {
-                container += "s";
+                name += "s";
             }
             switch(type){
-                case 0: return `There is ${subject.article}in the ${container}.`;
-                case 1: return `There isn't ${subject.article}in the ${container}.`;
-                case 2: return `Is there ${subject.article}in the ${container}?`;
-                case 3: return `There are ${subject.article}in the ${container}.`;
-                case 4: return `There aren't ${subject.article}in the ${container}.`;
-                case 5: return `Are there ${subject.article}in the ${container}?`;
-                case 6: return `There is`;
-                case 7: return `There isn't`;
-                case 8: return `Is there`;
-                case 9: return `There are`;
-                case 10: return `There aren't`;
-                case 11: return `Are there`;
-                case 12: return `${subject.article}in the ${container}.`;
+                case 0: return `There is ${article} ${name} in the ${container}.`;
+                case 1: return `There isn't ${article} ${name} in the ${container}.`;
+                case 2: return `Is there ${article} ${name} in the ${container}?`;
+                case 3: return `${article} ${name} in the ${container}.`;
+                case 4: return `${article} ${name} in the ${container}.`;
+                case 5: return `${article} ${name} in the ${container}?`;
+                case 6: return `There are ${name} in the ${container}.`;
+                case 7: return `There aren't ${name} in the ${container}.`;
+                case 8: return `Are there ${name} in the ${container}?`;
+                case 9: return `There is`;
+                case 10: return `There isn't`;
+                case 11: return `Is there`;
+                case 12: return `There are`;
+                case 13: return `There aren't`;
+                case 14: return `Are there`;
+                case 15: return `${article} ${name} in the ${container}.`;
+                case 16: return `${article} ${name} in the ${container}?`;
+                case 17: return `Yes, there is.`;
+                case 18: return `No, there isn't.`;
+                case 19: return `Yes, there are.`;
+                case 20: return `No, there aren't.`;
                 default: return "";
             }
         }
@@ -105,7 +118,75 @@
     let questions: Question[] = [];
     let form: number[] = [];
     for (let i = 0; i < 10; i++) {
-        let type: number = Math.floor(Math.random() * 3);
-        let amount: number = Math.floor(Math.random() * 3) + 1;
+        let amount = Math.floor(Math.random() * 3) + 1;
+        let answerType: number = Math.floor(Math.random() * 3 + 9);
+        let f = answerType - 9;
+        form.push(f);
+        let questionType: number = (answerType == 11) ? 16 : 15;
+        if(amount > 1)
+            answerType += 3;
+        let s: Subject = GetRandomSubject();
+        let q: Question = new Question(s, amount, questionType, answerType);
+        questions.push(q);
+    }
+    
+    for(let i = 0; i < 5; i++) {
+        let amount = Math.floor(Math.random() * 3) + 1;
+        let answerType = Math.floor(Math.random() * 2) + 17;
+        let f = answerType - 17;
+        form.push(f);
+        let questionType = (amount == 1) ? 2 : 8;
+        if(amount > 1)
+            answerType += 2;
+        let s = GetRandomSubject();
+        let q = new Question(s, amount, questionType, answerType);
+        questions.push(q);
+    }
+
+    const answersElement = document.getElementsByClassName("answer");
+    const showButtons = document.getElementsByClassName("show-button");
+    const checkButtons = document.getElementsByClassName("check-button");
+    const resultElement = document.getElementsByClassName("result");
+    const InputElement = document.querySelectorAll("input");
+    const descriptionElement = document.getElementsByClassName("description");
+    const thumbsElement = document.getElementsByClassName("thumbs");
+
+    for(let i = 0; i < answersElement.length; i++){
+        answersElement[i].innerHTML = questions[i].answer;
+    }
+    for(let i = 0; i < descriptionElement.length; i++){
+        descriptionElement[i].innerHTML = questions[i].description;
+    }
+    for (let i = 0; i < form.length; i++){
+        if(form[i] == 0){
+            thumbsElement[i].classList.add("thumbs--up");
+        } else if(form[i] == 1){
+            thumbsElement[i].classList.add("thumbs--down");
+        } else if (form[i] == 2){
+            thumbsElement[i].classList.add("question--mark");
+        }
+        else{
+            console.log(`Something went wrong with the thumbs. Form at position ${i}'s value is ${form[i]}`);
+        }
+    }
+
+
+    for(let i = 0; i < showButtons.length; i++){
+        showButtons[i].addEventListener("click", () => showAnswer(i));
+        checkButtons[i].addEventListener("click", () => checkAnswer(i));
+    }
+    function showAnswer(i: number){
+        answersElement[i].classList.toggle("answer--show");
+    }
+    
+    function checkAnswer(i: number){
+    if(resultElement[i].classList.contains("result--right"))
+        resultElement[i].classList.remove("result--right");
+    if(resultElement[i].classList.contains("result--wrong"))
+        resultElement[i].classList.remove("result--wrong");
+    if(questions[i].answer == InputElement[i].value)
+        resultElement[i].classList.add("result--right");
+    else
+        resultElement[i].classList.add("result--wrong");
     }
 }

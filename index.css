@@ -1,10 +1,13 @@
 .exercises-section {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .exercise__div{
     display: flex;
     flex-direction: column;
+    justify-content: space-evenly;
     align-items: center;
     text-align: center;
     width: var(--div-width);
@@ -15,9 +18,12 @@
     text-shadow: 0 0 2px #040404;
     cursor: pointer;
     padding: var(--div-padding);
-    margin: 0 1rem;
+    margin: 1rem 1rem;
     height: 300px;
+    transition: 0.3s;
 }
+
+.exercise__div:hover{ transform: scale(1.025); }
 
 .exercise__image{
     border-radius: 100%;
@@ -39,6 +45,9 @@
 .exercise__image--painting{
     background-image: url("images/painting.jpg");
 }
+.exercise__image--living-room{
+    background-image: url("images/living-room.jpg");
+}
 
 .exercise__name{
     font-size: 1.35rem;
@@ -47,13 +56,13 @@
 }
 
 .exercise__vocabulary{
-    margin: 5px;
+    margin: 7.5px;
     height: 2rem;
     vertical-align: middle;
 }
 
 .exercise__grammar{
-    margin: 5px;
+    margin: .7.5px;
     height: 2rem;
     vertical-align: middle;
 }
