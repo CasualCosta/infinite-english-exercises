@@ -1,0 +1,17 @@
+.description {
+    width: 320px;
+    order: -1;
+}
+
+.thumbs{
+    display: none;
+}
+
+.exercise__input {
+    width: 20px;
+}
+
+.answer{
+    min-width: 20px;
+    min-height: 1rem;
+}

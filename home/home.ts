@@ -1,7 +1,7 @@
 {
     //#region Subject
     class Subject{
-        readonly name : string;
+        readonly name: string;
         readonly container: string;
         readonly article: string;
         readonly isFurniture: boolean;

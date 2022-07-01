@@ -48,11 +48,15 @@
 .exercise__image--living-room{
     background-image: url("images/living-room.jpg");
 }
+.exercise__image--job-meeting{
+    background-image: url("images/job-meeting.jpg");
+}
 
 .exercise__name{
     font-size: 1.35rem;
     margin: 10px 0;
     height: 2rem;
+    vertical-align: middle;
 }
 
 .exercise__vocabulary{
