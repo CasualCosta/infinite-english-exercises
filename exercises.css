@@ -41,6 +41,8 @@
 .answer{
     position: absolute;
     background-color: greenyellow;
+    padding: 4px 8px;
+    border-radius: 3px;
     top: -3.5rem;
     display: none;
 }
