@@ -60,6 +60,10 @@
     background-image: url("images/attic.jpg");
 }
 
+.exercise__image--family{
+    background-image: url("images/family.jpg");
+}
+
 .exercise__name{
     font-size: 1.35rem;
     margin: 10px 0;

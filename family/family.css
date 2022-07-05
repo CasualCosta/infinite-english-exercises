@@ -1,0 +1,12 @@
+.description{
+    width: 220px;
+}
+
+.negative-order{
+    order: -1;
+    width: 320px;
+}
+
+.exercise__input--one{
+    width: 280px;
+}

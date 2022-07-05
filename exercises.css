@@ -20,6 +20,10 @@
     margin: 2px 5px;
 }
 
+.exercise__input {
+    border-radius: 5px;
+}
+
 .result{
     width: 20px;
     height: 20px;
@@ -27,22 +31,35 @@
 }
 
 .result--right{
-    background-image: url("images/result-right.svg");
+    background-image: url("images/result-right--green.svg");
 }
 
 .result--wrong{
-    background-image: url("images/result-wrong.svg");
+    background-image: url("images/result-wrong--red.svg");
 }
 
 .show-button{
     position: relative;
 }
 
+.check-button, .show-button{
+    background-color: greenyellow;
+    padding: 2px 5px;
+    border: 1px solid white;
+    border-radius: 5px;
+    transition: 0.1s;
+}
+
+.check-button:hover, .show-button:hover{
+    transform: scale(1.025);
+}
+
 .answer{
     position: absolute;
     background-color: greenyellow;
     padding: 4px 8px;
-    border-radius: 3px;
+    border: 3px solid white;
+    border-radius: 5px;
     top: -3.5rem;
     display: none;
 }
